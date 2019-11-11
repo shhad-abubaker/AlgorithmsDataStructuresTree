@@ -5,6 +5,8 @@
  */
 package Gui;
 
+import DataStructures.Tree;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,13 +14,66 @@ package Gui;
  */
 public class BSTFrame extends javax.swing.JFrame
 {
-	
+
+	Tree tree = new Tree();
+
+	;
+
 	/**
 	 * Creates new form BST
 	 */
 	public BSTFrame()
 	{
 		initComponents();
+	}
+
+	private void initialiseDefaultTree()
+	{
+		this.tree.clear();
+		for (int number = 1; number <= 10; number++)
+		{
+			int intVal = (int) (Math.random() * 100);
+			System.out.print(intVal + " ");
+			tree.insertNode(intVal + "");
+		}
+	}
+
+	//
+	//	Event Handlers
+	//
+	private void addButtonAction()
+	{
+		String input = JOptionPane.showInputDialog(this, "Please enter a value");
+		tree.insertNode(input);
+
+	}
+
+	private void defaultTreeButtonAction()
+	{
+		this.initialiseDefaultTree();
+	}
+
+	private void clearButtonAction()
+	{
+		this.tree.clear();
+	}
+	private void inOrderPrintButtonAction()
+	{
+		printConsole(tree.inorderTraversal());
+	}
+
+	private void postOrderButtonAction()
+	{
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	private void preOrderPrintButtonAction()
+	{
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+	public void printConsole(String text)
+	{
+		this.messageBoxTextArea.insert(text + System.lineSeparator(), 0);
 	}
 
 	/**
@@ -31,50 +86,149 @@ public class BSTFrame extends javax.swing.JFrame
     private void initComponents()
     {
 
-        wrdLBL = new javax.swing.JLabel();
-        wrdTextField = new javax.swing.JTextField();
-        continueBttn = new javax.swing.JButton();
+        addItemButton = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
+        defaultTreeButton = new javax.swing.JButton();
+        preOrderPrintButton = new javax.swing.JButton();
+        inOrderPrintButton = new javax.swing.JButton();
+        postOrderButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        messageBoxTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BST");
 
-        wrdLBL.setText("please enter words:");
+        addItemButton.setText("Add");
+        addItemButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                addItemButtonActionPerformed(evt);
+            }
+        });
 
-        continueBttn.setText("continue");
+        clearButton.setText("clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                clearButtonActionPerformed(evt);
+            }
+        });
+
+        defaultTreeButton.setText("default tree");
+        defaultTreeButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                defaultTreeButtonActionPerformed(evt);
+            }
+        });
+
+        preOrderPrintButton.setText("inOrder");
+        preOrderPrintButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                preOrderPrintButtonActionPerformed(evt);
+            }
+        });
+
+        inOrderPrintButton.setText("preorder");
+        inOrderPrintButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                inOrderPrintButtonActionPerformed(evt);
+            }
+        });
+
+        postOrderButton.setText("postOrder");
+        postOrderButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                postOrderButtonActionPerformed(evt);
+            }
+        });
+
+        messageBoxTextArea.setColumns(20);
+        messageBoxTextArea.setRows(5);
+        jScrollPane1.setViewportView(messageBoxTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(wrdLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(continueBttn)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 76, Short.MAX_VALUE)
-                .addComponent(wrdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inOrderPrintButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(preOrderPrintButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(clearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(defaultTreeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(postOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(wrdLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(wrdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addComponent(continueBttn)
-                .addGap(59, 59, 59))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addItemButton)
+                    .addComponent(clearButton)
+                    .addComponent(defaultTreeButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(preOrderPrintButton)
+                    .addComponent(postOrderButton)
+                    .addComponent(inOrderPrintButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void defaultTreeButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_defaultTreeButtonActionPerformed
+    {//GEN-HEADEREND:event_defaultTreeButtonActionPerformed
+		this.defaultTreeButtonAction();
+    }//GEN-LAST:event_defaultTreeButtonActionPerformed
+
+    private void inOrderPrintButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_inOrderPrintButtonActionPerformed
+    {//GEN-HEADEREND:event_inOrderPrintButtonActionPerformed
+		inOrderPrintButtonAction();
+    }//GEN-LAST:event_inOrderPrintButtonActionPerformed
+
+    private void postOrderButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_postOrderButtonActionPerformed
+    {//GEN-HEADEREND:event_postOrderButtonActionPerformed
+		postOrderButtonAction();
+    }//GEN-LAST:event_postOrderButtonActionPerformed
+
+    private void addItemButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addItemButtonActionPerformed
+    {//GEN-HEADEREND:event_addItemButtonActionPerformed
+		this.addButtonAction();// TODO add your handling code here:
+    }//GEN-LAST:event_addItemButtonActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_clearButtonActionPerformed
+    {//GEN-HEADEREND:event_clearButtonActionPerformed
+		this.clearButtonAction();
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void preOrderPrintButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_preOrderPrintButtonActionPerformed
+    {//GEN-HEADEREND:event_preOrderPrintButtonActionPerformed
+       preOrderPrintButtonAction();
+    }//GEN-LAST:event_preOrderPrintButtonActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -123,8 +277,16 @@ public class BSTFrame extends javax.swing.JFrame
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton continueBttn;
-    private javax.swing.JLabel wrdLBL;
-    private javax.swing.JTextField wrdTextField;
+    private javax.swing.JButton addItemButton;
+    private javax.swing.JButton clearButton;
+    private javax.swing.JButton defaultTreeButton;
+    private javax.swing.JButton inOrderPrintButton;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea messageBoxTextArea;
+    private javax.swing.JButton postOrderButton;
+    private javax.swing.JButton preOrderPrintButton;
     // End of variables declaration//GEN-END:variables
+
+
+
 }
